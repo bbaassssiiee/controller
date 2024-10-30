@@ -1,0 +1,9 @@
+---
+# Don't use these default values.
+# Use ansible-vault to encrypt values generated with
+# `head -c32 /dev/urandom | base64`
+#
+vault_admin_password: '8GJGyjA22zW6aZ9qyFT2hHu3+cAuvhzR6Ae6phEm53A='
+vault_cookie_hash: 'WFt2E04IzeWofFUqJSGCtw2m4N/QvNCa8m8xZGdrQmw='
+vault_cookie_encryption: 'd6+lu1rrzZoAJNPid3mq06yH9rny7Y7b6hEZdwDqEM='
+vault_access_key_encryption: 'EFWQKjcvHV8LpaCzQAJNOqCX//pW4jd2GRuR3Yo/UOU='

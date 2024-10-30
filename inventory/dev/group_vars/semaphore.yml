@@ -1,32 +1,4 @@
 ---
-# https://github.com/Thulium-Drake/ansible-role-ansible_semaphore
-# Database settings
-# This key is used to encrypt database variables
-# Generate one with "head -c32 /dev/urandom | base64"
-# DO NOT USE THIS EXAMPLE VALUE!
-semaphore_access_key_encryption: 'FTPx9lHuO0+VBbtFhP5HczOtFqLNBF2QFeLbWjkMPLc='
-
-semaphore_db_flavor: 'postgres'       # bolt, postgres or mysql
-semaphore_db_host: 'localhost'
-semaphore_db_name: 'semaphore'
-semaphore_db_user: 'semaphore'
-semaphore_db_pass: "{{ lookup('env', 'DEV_PASS') }}"
-
-# Local admin user
-# Keep local admin user up to date (create the user and update the password)
-semaphore_admin_user_manage: true
-semaphore_admin_user: 'admin'
-semaphore_admin_pass: "{{ lookup('env', 'DEV_PASS') }}"
-semaphore_admin_email: 'root@localhost'
-
-# WebUI settings
-semaphore_service_uri: "https://{{ ansible_fqdn | default(ansible_hostname) }}"
-semaphore_port: 8081
-# This key is used to encrypt and hash cookies
-# Generate one with "head -c32 /dev/urandom | base64"
-# DO NOT USE THESE EXAMPLE VALUES!
-semaphore_cookie_encryption: 'xmPzUmrAfg3fKkckGVJ7rVBpBoRYUBX0OQ9YLZkJ0a4='
-semaphore_cookie_hash: 'FTPx9lHuO0+VBbtFhP5HczOtFqLNBF2QFeLbWjkMPLc='
-
-semaphore_concurrency_mode: 'project'    # empty, 'node' or 'project'
-semaphore_max_parallel_tasks: 0
+docker_users: vagrant
+docker_install_compose: true
+docker_install_compose_plugin: true

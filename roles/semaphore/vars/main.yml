@@ -1,0 +1,5 @@
+---
+semaphore_admin_password: "{{ vault_admin_password }}"
+semaphore_cookie_hash: "{{ vault_cookie_hash }}"
+semaphore_cookie_encryption: "{{ vault_cookie_encryption }}"
+semaphore_access_key_encryption: "{{ vault_access_key_encryption }}"

@@ -1,0 +1,16 @@
+---
+
+- name: restart semaphore
+  community.docker.docker_compose:
+    project_src: .
+    restarted: True
+  tags:
+    - start
+    - restart
+
+- name: stop semaphore
+  community.docker.docker_compose:
+    project_src: .
+    state: absent
+  tags:
+    - stop

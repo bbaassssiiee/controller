@@ -1,0 +1,25 @@
+- name: Install pip
+  ansible.builtin.package:
+    name: python3-pip
+    state: present
+
+- name: Install docker module
+  ansible.builtin.pip:
+    name:
+      - docker
+      - docker-compose
+    state: present
+
+- name: Deploy docker-compose.yml
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: docker-compose.yml
+  notify: restart semaphore
+
+- name: Pull image for semaphore
+  community.docker.docker_compose:
+    project_src: .
+    state: present
+    pull: true
+    recreate: never
+  notify: restart semaphore
