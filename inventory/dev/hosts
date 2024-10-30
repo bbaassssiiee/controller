@@ -24,7 +24,7 @@ controller ansible_host=192.168.56.3
 linux
 windows
 
-[linux:vars]
+[dev:vars]
 ansible_user=vagrant
 ansible_private_key_file = ~/.vagrant.d/insecure_private_key
 

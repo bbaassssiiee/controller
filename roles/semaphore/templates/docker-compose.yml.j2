@@ -1,7 +1,7 @@
 services:
     semaphore:
         ports:
-            - 3000:8081
+            - {{ bind_port }}:{{ semaphore_port }}
         image: semaphoreui/semaphore:v2.10.32
         environment:
             SEMAPHORE_DB_DIALECT: postgres
@@ -10,14 +10,15 @@ services:
             SEMAPHORE_DB_USER: semaphore
             SEMAPHORE_DB_PASS: qwerty67
             SEMAPHORE_ADMIN: admin
-            SEMAPHORE_ADMIN_PASSWORD: {{ semaphore_admin_password }}
+            SEMAPHORE_ADMIN_PASSWORD: "{{ semaphore_admin_password }}"
             SEMAPHORE_ADMIN_NAME: Admin
             SEMAPHORE_ADMIN_EMAIL: admin@localhost
             SEMAPHORE_PORT: 8081
             SEMAPHORE_GIT_CLIENT: cmd_git
-            SEMAPHORE_COOKIE_HASH: {{ semaphore_cookie_hash }}
-            SEMAPHORE_COOKIE_ENCRYPTION: {{ semaphore_cookie_encryption }}
-            SEMAPHORE_ACCESS_KEY_ENCRYPTION: {{ semaphore_access_key_encryption }}
+            SEMAPHORE_COOKIE_HASH: "{{ semaphore_cookie_hash }}"
+            SEMAPHORE_COOKIE_ENCRYPTION: "{{ semaphore_cookie_encryption }}"
+            SEMAPHORE_ACCESS_KEY_ENCRYPTION: "{{ semaphore_access_key_encryption }}"
+            SEMAPHORE_WEB_ROOT: "{{ semaphore_web_root }}"
         volumes:
             - semaphore_data:/var/lib/semaphore
             - semaphore_config:/etc/semaphore

@@ -11,9 +11,12 @@
     state: present
 
 - name: Deploy docker-compose.yml
+  become: false
   ansible.builtin.template:
     src: docker-compose.yml.j2
     dest: docker-compose.yml
+    owner: "{{ ansible_user }}"
+    mode: '0600'
   notify: restart semaphore
 
 - name: Pull image for semaphore
