@@ -60,7 +60,7 @@
   notify: Restart semaphore
 
 - name: Create semaphore service
-  template:
+  ansible.builtin.template:
     src: semaphore.service.j2
     dest: /usr/lib/systemd/system/semaphore.service
     owner: root
@@ -69,7 +69,7 @@
   notify: Restart semaphore
 
 - name: Enable semaphore service
-  systemd:
+  ansible.builtin.systemd:
     name: semaphore.service
     enabled: true
     daemon_reload: true
