@@ -52,9 +52,9 @@
   notify: restart semaphore
 
 - name: Pull image for semaphore
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: /home/semaphore
     state: present
-    pull: true
+    pull: missing
     recreate: never
   notify: restart semaphore
