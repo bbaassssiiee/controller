@@ -1,6 +1,6 @@
 ---
 semaphore_port: 3000
-bind_port: 8081
+bind_port: 3000
 semaphore_service_uri: "https://{{ ansible_fqdn | default(ansible_hostname) }}"
 # Don't use these default values.
 # Use ansible-vault to encrypt values generated with

@@ -2,7 +2,7 @@
 
 - name: restart semaphore
   community.docker.docker_compose:
-    project_src: .
+    project_src: /home/semaphore
     restarted: True
   tags:
     - start
@@ -10,7 +10,7 @@
 
 - name: stop semaphore
   community.docker.docker_compose:
-    project_src: .
+    project_src: /home/semaphore
     state: absent
   tags:
     - stop

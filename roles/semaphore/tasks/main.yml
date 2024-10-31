@@ -10,18 +10,50 @@
       - docker-compose
     state: present
 
+- name: Create semaphore user
+  ansible.builtin.user:
+    name: semaphore
+    comment: SemaphoreUI
+    uid: 1001
+    group: docker
+
+- name: Create config directory
+  ansible.builtin.file:
+    path: /home/semaphore/config
+    state: directory
+    owner: semaphore
+    group: docker
+    mode: '0750'
+
+- name: Copy requirements.txt
+  ansible.builtin.copy:
+    src: requirements.txt
+    dest: /home/semaphore/config/
+    owner: semaphore
+    group: docker
+    mode: '0640'
+
+- name: Deploy .env
+  ansible.builtin.template:
+    src: env.j2
+    dest: /home/semaphore/.env
+    owner: semaphore
+    group: docker
+    mode: '0640'
+  notify: restart semaphore
+
 - name: Deploy docker-compose.yml
-  become: false
   ansible.builtin.template:
     src: docker-compose.yml.j2
-    dest: docker-compose.yml
-    owner: "{{ ansible_user }}"
-    mode: '0600'
+    dest: /home/semaphore/docker-compose.yml
+    owner: semaphore
+    group: docker
+    mode: '0640'
   notify: restart semaphore
 
 - name: Pull image for semaphore
   community.docker.docker_compose:
-    project_src: .
+    project_src: /home/semaphore
     state: present
     pull: true
     recreate: never
