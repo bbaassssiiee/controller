@@ -65,7 +65,7 @@
     dest: /usr/lib/systemd/system/semaphore.service
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: Restart semaphore
 
 - name: Enable semaphore service
