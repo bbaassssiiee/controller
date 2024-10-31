@@ -19,6 +19,7 @@ services:
           - SEMAPHORE_COOKIE_ENCRYPTION
           - SEMAPHORE_ACCESS_KEY_ENCRYPTION
           - SEMAPHORE_WEB_ROOT
+        restart: always
         volumes:
             - semaphore_config:/etc/semaphore/
             - semaphore_data:/var/lib/semaphore

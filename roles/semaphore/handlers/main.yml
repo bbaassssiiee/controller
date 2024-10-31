@@ -1,16 +1,7 @@
 ---
 
-- name: restart semaphore
-  community.docker.docker_compose_v2:
-    project_src: /home/semaphore
+- name: Restart semaphore
+  ansible.builtin.systemd:
+    name: semaphore
     state: restarted
-  tags:
-    - start
-    - restart
 
-- name: stop semaphore
-  community.docker.docker_compose_v2:
-    project_src: /home/semaphore
-    state: stopped
-  tags:
-    - stop
