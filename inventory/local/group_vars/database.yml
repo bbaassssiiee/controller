@@ -6,11 +6,11 @@ database:
     name: postgres
     owner: postgres
     username: postgres
-    password: "{{ lookup('env', 'TEST_PASS') }}"
+    password: "{{ lookup('env', 'DB_PASS') }}"
     enabled: true
   semaphore:
     name: semaphore
     owner: semaphore
     username: semaphore
-    password: "{{ lookup('env', 'TEST_PASS') }}"
+    password: "{{ lookup('env', 'DB_PASS') }}"
     enabled: true
