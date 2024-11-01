@@ -1,1 +1,3 @@
-ansible-galaxy install will download roles in this dir.
+## roles_path: galaxy_roles:roles
+# To install
+ansible-galaxy install -p galaxy_roles -r roles/requirements.yml
