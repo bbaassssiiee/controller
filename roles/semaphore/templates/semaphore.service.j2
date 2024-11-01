@@ -10,6 +10,8 @@ WorkingDirectory=/home/semaphore
 ExecStart=/usr/local/bin/docker-compose up
 ExecStop=/usr/local/bin/docker-compose down
 TimeoutStopSec=60
+Restart=always
+RestartSec=3s
 
 [Install]
 WantedBy=multi-user.target
