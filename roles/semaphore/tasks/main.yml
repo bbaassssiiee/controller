@@ -51,14 +51,6 @@
     mode: '0640'
   notify: Restart semaphore
 
-- name: Pull image for semaphore
-  community.docker.docker_compose_v2:
-    project_src: /home/semaphore
-    state: present
-    pull: missing
-    recreate: never
-  notify: Restart semaphore
-
 - name: Create semaphore service
   ansible.builtin.template:
     src: semaphore.service.j2
