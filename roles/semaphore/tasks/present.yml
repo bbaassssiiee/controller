@@ -1,0 +1,73 @@
+- name: Install pip
+  ansible.builtin.package:
+    name: python3-pip
+    state: present
+
+- name: Install docker python modules
+  ansible.builtin.pip:
+    name:
+      - docker
+      - docker-compose
+    state: present
+
+- name: Create semaphore user
+  ansible.builtin.user:
+    name: semaphore
+    comment: SemaphoreUI
+    uid: 1001
+    group: docker
+
+- name: Create config directory
+  ansible.builtin.file:
+    path: /home/semaphore/config
+    state: directory
+    owner: semaphore
+    group: docker
+    mode: '0750'
+
+- name: Copy requirements.txt
+  ansible.builtin.copy:
+    src: requirements.txt
+    dest: /home/semaphore/config/
+    owner: semaphore
+    group: docker
+    mode: '0640'
+  notify: Restart semaphore
+
+- name: Deploy .env
+  ansible.builtin.template:
+    src: env.j2
+    dest: /home/semaphore/.env
+    owner: semaphore
+    group: docker
+    mode: '0640'
+  notify: Restart semaphore
+
+- name: Deploy docker-compose.yml
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: /home/semaphore/docker-compose.yml
+    owner: semaphore
+    group: docker
+    mode: '0640'
+  notify: Restart semaphore
+
+- name: Pull image for semaphore
+  community.docker.docker_compose_v2_pull:
+    project_src: /home/semaphore
+
+- name: Create semaphore service
+  ansible.builtin.template:
+    src: semaphore.service.j2
+    dest: /usr/lib/systemd/system/semaphore.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart semaphore
+
+- name: Enable semaphore service
+  ansible.builtin.systemd:
+    name: semaphore.service
+    enabled: true
+    daemon_reload: true
+  notify: Restart semaphore

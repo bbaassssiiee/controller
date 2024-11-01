@@ -1,0 +1,40 @@
+# Verify desired state, both absent and present can be verified.
+---
+- name: "State variables - {{ desired_state }}"
+  ansible.builtin.include_vars: "{{ desired_state }}.yml"
+
+- name: Gather package facts
+  ansible.builtin.package_facts:
+
+- name: Assert package is installed
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - "'docker-ce' in ansible_facts.packages"
+
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
+- name: Assert service absence
+  when: desired_state == 'absent'
+  ansible.builtin.assert:
+    quiet: true
+    that:
+      - ansible_facts.services['semaphore'] is not defined
+
+- name: Test the service
+  when: desired_state == 'present'
+  block:
+    - name: Assert that service is OK
+      ansible.builtin.assert:
+        quiet: true
+        that:
+          - ansible_facts.services['semaphore.service'].status == 'enabled'
+          - ansible_facts.services['semaphore.service'].state == 'running'
+
+    - name: Verify port is listening
+      ansible.builtin.wait_for:
+        port: "{{ semaphore_port }}"
+        state: started
+        timeout: 10
+

@@ -1,0 +1,42 @@
+---
+- name: Stop and disable semaphore service
+  ansible.builtin.systemd:
+    name: semaphore.service
+    enabled: false
+    state: stopped
+    daemon_reload: true
+
+- name: Check compose file
+  ansible.builtin.stat:
+    path: /home/semaphore/docker-compose.yml
+  register: compose_file
+
+- name: Remove docker-compose
+  when: compose_file.stat.exists | bool
+  community.docker.docker_compose_v2:
+    project_src: /home/semaphore
+    state: absent
+    remove_images: all
+    remove_volumes: true
+    remove_orphans: true
+
+- name: Remove config directory
+  ansible.builtin.file:
+    path: "/home/semaphore/{{ item }}"
+    state: absent
+  loop:
+    - config
+    - .env
+    - docker-compose.yml
+
+- name: Remove docker modules
+  ansible.builtin.pip:
+    name:
+      - docker
+      - docker-compose
+    state: absent
+
+- name: Remove semaphore user
+  ansible.builtin.user:
+    name: semaphore
+    state: absent

@@ -2,7 +2,7 @@ services:
     semaphore:
         ports:
             - {{ bind_port }}:{{ semaphore_port }}
-        image: semaphoreui/semaphore:v2.10.32
+        image: {{ semaphore_image }}
         environment:
           - SEMAPHORE_DB_DIALECT=postgres
           - SEMAPHORE_DB_HOST=${SEMAPHORE_DB_HOST}
