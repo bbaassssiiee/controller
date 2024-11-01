@@ -14,18 +14,16 @@ services:
           - SEMAPHORE_ADMIN_NAME
           - SEMAPHORE_ADMIN_EMAIL
           - SEMAPHORE_PORT=3000
-          - SEMAPHORE_GIT_CLIENT= cmd_git
+          - SEMAPHORE_GIT_CLIENT=cmd_git
           - SEMAPHORE_COOKIE_HASH
           - SEMAPHORE_COOKIE_ENCRYPTION
           - SEMAPHORE_ACCESS_KEY_ENCRYPTION
           - SEMAPHORE_WEB_ROOT
         restart: always
         volumes:
-            - semaphore_config:/etc/semaphore/
+            - /home/semaphore/config/requirements.txt:/etc/semaphore/requirements.txt
             - semaphore_data:/var/lib/semaphore
             - semaphore_tmp:/tmp/semaphore
-
 volumes:
-    semaphore_config:
     semaphore_data:
     semaphore_tmp:
