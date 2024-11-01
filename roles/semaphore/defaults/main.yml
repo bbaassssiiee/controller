@@ -1,5 +1,6 @@
 ---
 semaphore_port: 3000
+semaphore_db_host: "{{ ansible_default_ipv4.address }}"
 bind_port: 3000
 semaphore_service_uri: "https://{{ ansible_fqdn | default(ansible_hostname) }}"
 # Don't use these default values.

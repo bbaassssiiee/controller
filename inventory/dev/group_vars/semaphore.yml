@@ -1,2 +1,4 @@
 ---
 semaphore_web_root: 'https://controller'
+semaphore_db_host: "{{ ansible_eth1.ipv4.address }}"
+
