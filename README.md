@@ -1,7 +1,7 @@
 # Ansible Controller with SemaphoreUI
 
-Vagrant up will create a dev machine named 'controller', add it to your /etc/hosts.
+`vagrant up` will create a dev machine named 'controller', add it to your /etc/hosts.
 
-Use with your own inventory.
-
+Use this project with your own inventory, or use 'local' for localhost playbook provision.yml.
+Don't forget to `export DB_PASS=database_password`
 

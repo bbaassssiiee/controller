@@ -1,6 +1,4 @@
 ---
-verify_state: false
-
 docker_users:
   - "{{ ansible_user }}"
 docker_install_compose: true

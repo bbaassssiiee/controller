@@ -1,5 +1,3 @@
 ---
-verify_state: false
-
 docker_install_compose: true
 docker_install_compose_plugin: true
