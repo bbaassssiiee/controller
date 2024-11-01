@@ -10,7 +10,7 @@ semaphore_service_uri: "https://{{ ansible_fqdn | default(ansible_hostname) }}"
 # Use ansible-vault to encrypt values generated with
 # `head -c32 /dev/urandom | base64`
 #
-vault_admin_password: "{{ lookup('pipe','head -c32 /dev/urandom | base64') }}"
-vault_cookie_hash: "{{ lookup('pipe','head -c32 /dev/urandom | base64') }}"
-vault_cookie_encryption: "{{ lookup('pipe','head -c32 /dev/urandom | base64') }}"
-vault_access_key_encryption: "{{ lookup('pipe','head -c32 /dev/urandom | base64') }}"
+vault_admin_password: "{{ lookup('pipe', 'head -c32 /dev/urandom | base64') }}"
+vault_cookie_hash: "{{ lookup('pipe', 'head -c32 /dev/urandom | base64') }}"
+vault_cookie_encryption: "{{ lookup('pipe', 'head -c32 /dev/urandom | base64') }}"
+vault_access_key_encryption: "{{ lookup('pipe', 'head -c32 /dev/urandom | base64') }}"

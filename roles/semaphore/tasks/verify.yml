@@ -37,4 +37,3 @@
         port: "{{ semaphore_port }}"
         state: started
         timeout: 10
-
