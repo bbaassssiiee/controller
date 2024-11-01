@@ -33,7 +33,13 @@
     group: docker
     mode: '0640'
 
-- name: Deploy .env
+- name: Check if .env file exists
+  ansible.builtin.stat:
+    path: /home/semaphore/.env
+  register: env_file
+
+- name: Deploy .env file if not exists
+  when: not env_file.stat.exists
   ansible.builtin.template:
     src: env.j2
     dest: /home/semaphore/.env
