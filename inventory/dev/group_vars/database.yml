@@ -8,12 +8,6 @@ database:
     username: postgres
     password: "{{ lookup('env', 'DEV_PASS') }}"
     enabled: true
-  gitea:
-    name: gitea
-    owner: gitea
-    username: gitea
-    password: "{{ lookup('env', 'DEV_PASS') }}"
-    enabled: true
   semaphore:
     name: semaphore
     owner: semaphore
