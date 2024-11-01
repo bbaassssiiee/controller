@@ -5,6 +5,7 @@ After=docker.service
 
 [Service]
 Restart=always
+RestartSec=25s
 WorkingDirectory=/home/semaphore
 ExecStart=/usr/local/bin/docker-compose up
 ExecStop=/usr/local/bin/docker-compose down
