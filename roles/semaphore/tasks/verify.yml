@@ -36,4 +36,4 @@
       ansible.builtin.wait_for:
         port: "{{ semaphore_port }}"
         state: started
-        timeout: 10
+        timeout: 60
