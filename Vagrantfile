@@ -57,7 +57,7 @@ Vagrant.configure(2) do |config|
     end
   end
   config.vm.define 'controller' , autostart: true, primary: true do |controller|
-    controller.vm.box = "bento/almalinux-8.10"
+    controller.vm.box = "almalinux/8"
     controller.vm.network "private_network", ip: "192.168.56.3"
     controller.vm.hostname = "controller"
     controller.vm.provider :virtualbox do |virtualbox|
