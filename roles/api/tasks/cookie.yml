@@ -6,7 +6,6 @@
   changed_when: false
   no_log: true
 
-
 - name: Set facts
   ansible.builtin.set_fact:
     semaphore_password: "{{ admin_pass.stdout[1:] }}="
