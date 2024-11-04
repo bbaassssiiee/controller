@@ -28,3 +28,28 @@
   roles:
     - role: nginx
       tags: [nginx]
+
+
+- name: Configure Semaphore
+  hosts: semaphore
+  become: true
+  gather_facts: true
+
+  vars:
+    semaphore_api_url: "http://localhost:3000/api"
+    semaphore_username: semaphore
+
+  module_defaults:
+    ansible.builtin.uri:
+      use_proxy: false
+      headers:
+        Content-Type: "application/json"
+      body_format: json
+      validate_certs: false
+      timeout: 5
+
+  tasks:
+  roles:
+    - role: api
+      tags: [semaphore]
+

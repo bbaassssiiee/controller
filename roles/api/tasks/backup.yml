@@ -1,0 +1,7 @@
+---
+- name: Store env as facts
+  ansible.builtin.fetch:
+    src: /home/semaphore/.env
+    dest: files/
+    flat: true
+
