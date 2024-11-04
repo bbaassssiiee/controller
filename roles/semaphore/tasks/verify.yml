@@ -5,6 +5,7 @@
 
 - name: Gather package facts
   ansible.builtin.package_facts:
+  no_log: true
 
 - name: Assert package is installed
   ansible.builtin.assert:
@@ -14,6 +15,7 @@
 
 - name: Gather service facts
   ansible.builtin.service_facts:
+  no_log: true
 
 - name: Assert service absence
   when: desired_state == 'absent'
