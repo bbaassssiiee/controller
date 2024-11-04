@@ -11,7 +11,7 @@
     - role: postgres
       tags: [postgres]
 
-- name: Semaphore
+- name: Semaphore in Docker
   hosts: semaphore
   become: true
   gather_facts: true
