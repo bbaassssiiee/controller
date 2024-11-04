@@ -18,7 +18,7 @@
     group: docker
     generate_ssh_key: true
     ssh_key_type: ed25519
-    ssh_key_passphrase: "{{ vault_ssh_passphrase }}"
+    ssh_key_passphrase: "{{ ssh_passphrase }}"
     system: true
 
 - name: Enable SSH access
