@@ -16,6 +16,10 @@
     comment: SemaphoreUI
     uid: 1001
     group: docker
+    generate_ssh_key: true
+    ssh_key_type: ed25519
+    ssh_key_passphrase: "{{ vault_ssh_passphrase }}"
+    system: true
 
 - name: Create config directory
   ansible.builtin.file:
