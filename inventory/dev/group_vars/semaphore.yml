@@ -5,3 +5,5 @@ semaphore_db_host: "{{ ansible_enp0s8.ipv4.address }}"
 controller_repository_name: "example-repo"
 controller_repository_git_url: "https://github.comi/bbaassssiiee/controller.git"
 controller_repository_git_branch: "main"
+
+ssh_passphrase: "SomethingYouNeedToUse"

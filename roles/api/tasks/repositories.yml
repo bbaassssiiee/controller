@@ -1,0 +1,50 @@
+- name: "Configure Repository"
+  block:
+
+    - name: "Determine Repositories"
+      changed_when: false
+      check_mode: false
+      ansible.builtin.uri:
+        url: "{{ semaphore_api_url }}/project/{{ semaphore_project_id }}/repositories"
+        method: GET
+        headers:
+          Cookie: "{{ cookie }}"
+      register: semaphore_repositories
+
+    - name: "Create Repository"
+      changed_when: "semaphore_repository_created.status == 204"
+      ansible.builtin.uri:
+        url: "{{ semaphore_api_url }}/project/{{ semaphore_project_id }}/repositories"
+        method: POST
+        headers:
+          Cookie: "{{ cookie }}"
+        # project_id must be integer
+        body: >-
+          {
+            "project_id": {{ semaphore_project_id | int }},
+            "name": "{{ controller_repository_name }}",
+            "git_url": "{{ controller_repository_git_url }}",
+            "git_branch": "{{ controller_repository_git_branch }}",
+          }
+        body_format: json
+        status_code: 204
+      register: semaphore_repository_created
+      when:
+        (semaphore_repositories.status == "404") or ("semaphore_repositories.json | selectattr('name', 'equalto', controller_repository_name) | length == 0")
+
+    - name: "Determine Repositories (after creation)"
+      changed_when: false
+      check_mode: false
+      ansible.builtin.uri:
+        url: "{{ semaphore_api_url }}/project/{{ semaphore_project_id }}/repositories"
+        method: GET
+        headers:
+          Cookie: "{{ cookie }}"
+        status_code: 200
+      register: "semaphore_repositories"
+
+    - name: "Set facts semaphore_repository_id"
+      ansible.builtin.set_fact:
+        semaphore_repository_id: "{{ semaphore_repositories.json \
+          | selectattr('name', 'equalto', controller_repository_name) \
+          | map(attribute='id') | first }}"

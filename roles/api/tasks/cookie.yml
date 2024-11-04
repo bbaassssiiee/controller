@@ -1,0 +1,30 @@
+- name: Get admin password
+  ansible.builtin.shell: |
+    set -o pipefail;
+    grep SEMAPHORE_ADMIN_PASSWORD= /home/semaphore/.env | cut -d= -f2
+  register: admin_pass
+  changed_when: false
+  no_log: true
+
+
+- name: Set facts
+  ansible.builtin.set_fact:
+    semaphore_password: "{{ admin_pass.stdout[1:] }}="
+  no_log: true
+
+- name: Set API token
+  ansible.builtin.uri:
+    url: "{{ semaphore_api_url }}/auth/login"
+    method: POST
+    body:
+      auth: semaphore
+      password: "{{ semaphore_password }}"
+    status_code: 204
+    timeout: 5
+  register: login_response
+  no_log: true
+
+- name: Save Cookie
+  ansible.builtin.set_fact:
+    cookie: "{{ login_response.cookies_string }}"
+  when: login_response.status == 204

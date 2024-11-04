@@ -1,0 +1,45 @@
+---
+
+- name: "Configure Project"
+  block:
+    - name: "Determine Projects"
+      changed_when: false
+      check_mode: false
+      ansible.builtin.uri:
+        use_proxy: false
+        url: "{{ semaphore_api_url }}/projects"
+        method: GET
+        headers:
+          Cookie: "{{ cookie }}"
+        status_code: 200
+        timeout: 5
+      register: semaphore_projects
+
+    - name: "Create Project"
+      changed_when: "semaphore_project_created.status == 201"
+      ansible.builtin.uri:
+        use_proxy: false
+        url: "{{ semaphore_api_url }}/projects"
+        method: POST
+        headers:
+          Cookie: "{{ cookie }}"
+        body:
+          name: "Controller"
+        body_format: json
+        status_code: 201
+        timeout: 5
+      register: semaphore_project_created
+      when:
+        - "'Controller' not in (semaphore_projects.json | map(attribute='name'))"
+
+    - name: "Set fact semaphore_project_id (existing)"
+      ansible.builtin.set_fact:
+        semaphore_project_id: "{{ semaphore_projects.json | selectattr('name', 'equalto', 'Controller') | map(attribute='id') | first }}"
+      when:
+        - "'Controller' in (semaphore_projects.json | map(attribute='name'))"
+
+    - name: "Set fact semaphore_project_id (created)"
+      ansible.builtin.set_fact:
+        semaphore_project_id: "{{ semaphore_project_created.json.id }}"
+      when:
+        - "'Controller' not in (semaphore_projects.json | map(attribute='name'))"
