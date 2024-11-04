@@ -1,0 +1,16 @@
+---
+postgres_enabled: true
+# Postgresql users and databases/schemas
+database:
+  postgres:
+    name: postgres
+    owner: postgres
+    username: postgres
+    password: "{{ lookup('env', 'DB_PASS') }}"
+    enabled: true
+  semaphore:
+    name: semaphore
+    owner: semaphore
+    username: semaphore
+    password: "{{ lookup('env', 'DB_PASS') }}"
+    enabled: true
