@@ -1,6 +1,8 @@
 ---
 desired_state: present
 verify_state: true
+# Easier debugging
+debug: false
 semaphore_image: "semaphoreui/semaphore:v2.10.32"
 semaphore_port: 3000
 semaphore_db_host: "{{ ansible_default_ipv4.address }}"

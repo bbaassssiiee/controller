@@ -9,6 +9,8 @@
 - name: Kill processes of semaphore user 
   ansible.builtin.command:
     cmd: killall -u semaphore
+  register: killed
+  failed_when: killed.rc not in [0, 1]
 
 - name: Check compose file
   ansible.builtin.stat:

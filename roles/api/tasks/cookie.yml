@@ -4,12 +4,12 @@
     grep SEMAPHORE_ADMIN_PASSWORD= /home/semaphore/.env | cut -d= -f2
   register: admin_pass
   changed_when: false
-  no_log: true
+  no_log: "{{ not debug }}"
 
 - name: Set facts
   ansible.builtin.set_fact:
     semaphore_password: "{{ admin_pass.stdout[1:] }}="
-  no_log: true
+  no_log: "{{ not debug }}"
 
 - name: Set API token
   ansible.builtin.uri:
@@ -21,7 +21,7 @@
     status_code: 204
     timeout: 5
   register: login_response
-  no_log: true
+  no_log: "{{ not debug }}"
 
 - name: Save Cookie
   ansible.builtin.set_fact:
