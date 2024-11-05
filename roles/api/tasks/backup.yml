@@ -1,5 +1,6 @@
 ---
-- name: Store env as facts
+- name: Backup .env 
+  when: backup | bool
   ansible.builtin.fetch:
     src: /home/semaphore/.env
     dest: files/
