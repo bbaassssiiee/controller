@@ -6,6 +6,10 @@
     state: stopped
     daemon_reload: true
 
+- name: Kill processes of semaphore user 
+  ansible.builtin.command:
+    cmd: killall -u semaphore
+
 - name: Check compose file
   ansible.builtin.stat:
     path: /home/semaphore/docker-compose.yml
