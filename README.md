@@ -114,9 +114,9 @@ To remove Semaphore run:
 ./provision.yml --tags semaphore -e desired_state=absent
 ```
 
-To remove Semaphore run:
+To reinstall Semaphore run with the default `desired_state`, i.e. _present_:
 ```bash
-./provision.yml --tags semaphore -e desired_state=absent
+./provision.yml --tags semaphore
 ```
 
 ## Contributing
