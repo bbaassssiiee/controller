@@ -14,4 +14,3 @@ controller ansible_host=10.0.0.206
 controller ansible_host=10.0.0.206
 [web]
 controller ansible_host=10.0.0.206
-
