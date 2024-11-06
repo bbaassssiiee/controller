@@ -1,5 +1,5 @@
 ---
 docker_install_compose: true
 docker_install_compose_plugin: true
-server_name: "{{ lookup('env', 'HOSTNAME') }}"
+server_name: controller
 ssh_passphrase: "{{ lookup('env', 'SSH_PASS') }}"
