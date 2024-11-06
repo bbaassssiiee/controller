@@ -37,4 +37,3 @@ repos:
       - id: git-check
       - id: script-must-have-extension
       - id: shellcheck
-      - id: shfmt
