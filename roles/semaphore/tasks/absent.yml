@@ -11,6 +11,7 @@
     cmd: killall -u semaphore
   register: killed
   failed_when: killed.rc not in [0, 1]
+  changed_when: killed.rc == 0
 
 - name: Check compose file
   ansible.builtin.stat:
