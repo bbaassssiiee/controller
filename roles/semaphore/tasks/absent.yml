@@ -6,7 +6,7 @@
     state: stopped
     daemon_reload: true
 
-- name: Kill processes of semaphore user 
+- name: Kill processes of semaphore user
   ansible.builtin.command:
     cmd: killall -u semaphore
   register: killed
