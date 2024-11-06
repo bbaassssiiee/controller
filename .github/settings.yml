@@ -1,0 +1,5 @@
+---
+repository:
+  description: SemaphoreUI deployment and configuration
+  homepage: https://semaphoreui.com/api-docs/
+  topics: semaphore, installer, ansible, playbook, docker-compose, postgresql, nginx-reverse-proxy
