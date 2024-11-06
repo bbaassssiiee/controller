@@ -23,7 +23,7 @@ Follow these steps to set up the environment:
 
 1. **Prerequisites**:
 
-   **Note**: The `inventory/local` configuration is suitable for direct deployment on systems like Red Hat, AlmaLinux, or Rocky Linux. In this setup, Vagrant and VirtualBox are not required.
+   **Note**: The `inventory/local` configuration is suitable for direct deployment on systems like Ubuntu Jammy, Red Hat, AlmaLinux, or Rocky Linux (8). In this setup, Vagrant and VirtualBox are not required.
    - [VirtualBox](https://www.virtualbox.org/), installed on your laptop.
    - [Vagrant](https://www.vagrantup.com/) installed on your laptop.
 
