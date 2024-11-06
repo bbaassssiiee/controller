@@ -48,34 +48,7 @@ Follow these steps to set up the environment:
    export DB_PASS=your_database_password
    export SSH_PASSPHRASE=KeyWillBeGeneratedWithAPassphrase
    ```
-   ```json
-   {
-      "ansible_connection": "local",
-      "ansible_host": "localhost",
-      "database": {
-         "postgres": {
-               "enabled": true,
-               "name": "postgres",
-               "owner": "postgres",
-               "password": "{{ lookup('env', 'DB_PASS') }}",
-               "username": "postgres"
-         },
-         "semaphore": {
-               "enabled": true,
-               "name": "semaphore",
-               "owner": "semaphore",
-               "password": "{{ lookup('env', 'DB_PASS') }}",
-               "username": "semaphore"
-         }
-      },
-      "docker_install_compose": true,
-      "docker_install_compose_plugin": true,
-      "postgres_enabled": true,
-      "semaphore_web_root": "https://controller",
-      "server_name": "{{ lookup('env', 'HOSTNAME') }}",
-      "ssh_passphrase": "{{ lookup('env', 'SSH_PASS') }}"
-   }
-   ```
+
 5. **Run the playbook**:
    Execute the Ansible playbook to provision to the default 'local' inventory:
    ```bash
@@ -101,13 +74,48 @@ Follow these steps to set up the environment:
 - **SSL Certificates**: By default, self-signed certificates are used. For production environments, it is recommended to implement certificates from a trusted certificate authority.
 
 - **Database**: Ensure that the `DB_PASS` environment variable is set with a strong password before running the playbook. To disable installation of Postgres and use your own intance set `postgres_enabled: false`
+  Semaphore needs to connect to the database, you can use a non-default IP address based on an interface like:
+
+```yaml
+    semaphore_db_host: "{{ ansible_enp0s8.ipv4.address }}"
+```
 
 - **Software Environments**: This project contains three inventories, but can be run with inventories define in external repositories modeled after the examples.
 
+This is the 'local' configuration:
+
+```yaml
+ansible_connection: local
+ansible_host: localhost
+database:
+  postgres:
+    enabled: true
+    name: postgres
+    owner: postgres
+    password: '{{ lookup(''env'', ''DB_PASS'') }}'
+    username: postgres
+  semaphore:
+    enabled: true
+    name: semaphore
+    owner: semaphore
+    password: '{{ lookup(''env'', ''DB_PASS'') }}'
+    username: semaphore
+docker_install_compose: true
+docker_install_compose_plugin: true
+postgres_enabled: true
+semaphore_web_root: https://controller
+server_name: '{{ lookup(''env'', ''HOSTNAME'') }}'
+ssh_passphrase: '{{ lookup(''env'', ''SSH_PASS'') }}'
+```
 
 ## Usage
 
 After successful installation, SemaphoreUI is accessible via your web browser at the address configured.
+You can find the credentials to login with:
+
+```bash
+sudo grep ADMIN /home/semaphore/.env
+```
 
 To remove Semaphore run:
 ```bash
