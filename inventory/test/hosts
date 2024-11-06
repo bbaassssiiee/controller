@@ -3,7 +3,6 @@ control
 
 [control:children]
 database
-git
 semaphore
 web
 

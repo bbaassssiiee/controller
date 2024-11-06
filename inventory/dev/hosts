@@ -7,7 +7,6 @@ infra
 
 [control:children]
 database
-git
 semaphore
 web
 

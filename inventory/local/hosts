@@ -3,13 +3,10 @@ control
 
 [control:children]
 database
-git
 semaphore
 web
 
 [database]
-controller ansible_host=localhost
-[git]
 controller ansible_host=localhost
 [semaphore]
 controller ansible_host=localhost
