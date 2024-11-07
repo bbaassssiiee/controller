@@ -50,4 +50,6 @@
   tasks:
   roles:
     - role: api
-      tags: [semaphore]
+      tags: 
+        - api
+        - semaphore
