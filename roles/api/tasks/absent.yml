@@ -1,0 +1,4 @@
+---
+- name: absent state
+  ansible.builtin.debug:
+    msg: 'desired_state: absent unimplemented'

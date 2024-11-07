@@ -1,13 +1,5 @@
----
+# Main tasks entry point for the role
 
-- name: Authenticate
-  ansible.builtin.include_tasks: cookie.yml
+- name: "Converge state - {{ desired_state }}"
+  ansible.builtin.include_tasks: "{{ desired_state }}.yml"
 
-- name: Backup
-  ansible.builtin.include_tasks: backup.yml
-
-- name: Create Controller
-  ansible.builtin.include_tasks: controller.yml
-
-- name: Credentials
-  ansible.builtin.include_tasks: credentials.yml
