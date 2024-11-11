@@ -1,5 +1,6 @@
 ---
 postgres_enabled: true
+postgres_version: 15
 # Postgresql users and databases/schemas
 database:
   postgres:
