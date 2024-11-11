@@ -1,2 +1,3 @@
 ---
 semaphore_web_root: 'https://controller'
+nginx_add_repo: false

@@ -1,5 +1,5 @@
 ---
 # Use our own Yum repository with geerlingguy.docker
 # docker_add_repo: false
-
+nginx_add_repo: false
 semaphore_web_root: 'https://controller'
