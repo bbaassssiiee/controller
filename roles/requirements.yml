@@ -4,5 +4,7 @@ roles:
     name: docker
   - src: bbaassssiiee.postgres_ssl
     name: postgres
+    version: 1.0.0
   - src: bbaassssiiee.nginx_ssl
     name: nginx
+    version: 1.0.0
