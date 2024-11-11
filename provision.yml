@@ -1,15 +1,28 @@
 #!/usr/bin/env ansible-playbook
-# export DB_PASS=RandomPostgresWords
+# export DB_PASS=aVeryStrongDatabasePassword
 ---
 
 - name: Database Server
   hosts: database
   become: true
   gather_facts: true
+  tags: [postgres]
+
+  pre_tasks:
+    - name: Lookup DB_PASS in environment variables
+      ansible.builtin.set_fact:
+        check_db_pass: "{{ lookup('env', 'DB_PASS') }}"
+
+    - name: Assert that DB_PASS is defined
+      ansible.builtin.assert:
+        that:
+          - check_db_pass | length > 8
+        msg: |
+          run this shell command before this playbook:
+          export DB_PASS=aVeryStrongDatabasePassword
 
   roles:
     - role: postgres
-      tags: [postgres]
 
 - name: Semaphore in Docker
   hosts: semaphore
