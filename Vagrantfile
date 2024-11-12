@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
       srv.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: guest['no_share']
       srv.vm.provider :virtualbox do |virtualbox|
         virtualbox.customize ["modifyvm", :id,
-           "--audio", "none",
+           "--audio-driver", "none",
            "--cpus", guest['cpus'],
            "--memory", guest['memory'],
            "--graphicscontroller", "VMSVGA",
