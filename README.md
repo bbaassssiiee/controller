@@ -40,9 +40,16 @@ Follow these steps to set up the environment:
     ./prepare.sh
    ```
 
-4. **Define the environment variables and inventory/name/group_vars**:
+4. **Define the variables in inventory/{{ name }}/group_vars**:
+   For instance, when you use the `local` inventory on an Ubuntu 22.04 machine, change this file
+   `inventory/local/group_vars/database.yml` from 15 to 14:
 
-   Define these secrets as environment variables, store them in a safe place afterwards:
+   ```yaml
+   postgres_version: 14
+   ```
+
+5. **Define these secrets as environment variables**
+   Store them in a safe place afterwards:
 
    ```bash
    export DB_PASS=your_database_password
